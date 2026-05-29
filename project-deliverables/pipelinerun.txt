@@ -1,4 +1,4 @@
-[clone] Cloning repo https://github.com/john-doe/devops-capstone-project...
+[clone] Cloning repo https://github.com/BrianGator/DevOps-Capstone-Workbook-CICD...
 [clone] Selected branch main
 [clone] Fetched 1.2MB pack files. Checked out commit 12f86ac
 [clone] Workspace synchronizations completed.
@@ -22,7 +22,7 @@
 [tests] Task unit-tests completed in 15.11 seconds.
 
 [build] Step 'buildah' starting...
-[build] Building image for https://github.com/john-doe/devops-capstone-project
+[build] Building image for https://github.com/BrianGator/DevOps-Capstone-Workbook-CICD
 [build] Resolving context directories: /workspace/pipeline-workspace/source
 [build] STEP 1: FROM python:3.9-slim AS builder
 [build] STEP 2: COPY requirements.txt .

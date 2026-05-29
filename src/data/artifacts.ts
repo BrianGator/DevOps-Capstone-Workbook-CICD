@@ -324,7 +324,7 @@ Date: Fri, 29 May 2026 21:39:00 GMT
     filename: 'artifacts/ci-workflow-done.txt',
     description: 'Terminal log capture illustrating successful completion of all GitHub Actions lint and test stages.',
     content: `Run actions/checkout@v3
-  Syncing repository devops-capstone-project
+  Syncing repository DevOps-Capstone-Workbook-CICD
   Completed Checkout
 
 Run Install System Dependencies
@@ -447,7 +447,7 @@ replicaset.apps/accounts-7f8976dcb9   3         3         3       5m4s
     title: 'pipelinerun.txt',
     filename: 'artifacts/pipelinerun.html',
     description: 'Complete pipeline execution logs from the Tekton CD run showing cloning, lint, testing, builds, and OpenShift deploy steps.',
-    content: `[clone] Cloning repo https://github.com/john-doe/devops-capstone-project...
+    content: `[clone] Cloning repo https://github.com/BrianGator/DevOps-Capstone-Workbook-CICD...
 [clone] Selected branch main
 [clone] Fetched 1.2MB pack files. Checked out commit 12f86ac
 [clone] Workspace synchronizations completed.
@@ -471,7 +471,7 @@ replicaset.apps/accounts-7f8976dcb9   3         3         3       5m4s
 [tests] Task unit-tests completed in 15.11 seconds.
 
 [build] Step 'buildah' starting...
-[build] Building image for https://github.com/john-doe/devops-capstone-project
+[build] Building image for https://github.com/BrianGator/DevOps-Capstone-Workbook-CICD
 [build] Resolving context directories: /workspace/pipeline-workspace/source
 [build] STEP 1: FROM python:3.9-slim AS builder
 [build] STEP 2: COPY requirements.txt .
@@ -502,9 +502,9 @@ replicaset.apps/accounts-7f8976dcb9   3         3         3       5m4s
     title: 'README.md Build Status Badge',
     filename: 'README.md',
     description: 'The updated Markdown project header containing the project title and a continuous integration action status badge.',
-    content: `# DevOps Capstone Project
+    content: `# DevOps-Capstone-Workbook-CICD
 
-[![CI Build](https://github.com/your-username/devops-capstone-project/actions/workflows/ci-build.yaml/badge.svg)](https://github.com/your-username/devops-capstone-project/actions/workflows/ci-build.yaml)
+[![CI Build](https://img.shields.io/github/actions/workflow/status/BrianGator/DevOps-Capstone-Workbook-CICD/ci-build.yaml?branch=main&logo=github)](https://github.com/BrianGator/DevOps-Capstone-Workbook-CICD/actions/workflows/ci-build.yaml)
 
 An elegantly configured, continuous-integration equipped microservice implementation of a RESTful Customer Account directory built on Python Flask, PostgreSQL database, and SQLAlchemy models.
 

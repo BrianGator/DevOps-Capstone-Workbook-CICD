@@ -1,5 +1,5 @@
 {
-  "name": "DevOps Capstone Companion",
+  "name": "DevOps-Capstone-Workbook-CICD",
   "description": "An interactive digital workbook, REST sandbox, and pipeline emulator for the DevOps Capstone Project. Plan user stories, run Flask API sandboxes, simulate CI/CD pipelines, and generate pristine submission artifacts.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]

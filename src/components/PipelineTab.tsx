@@ -51,7 +51,7 @@ export default function PipelineTab() {
     
     const logsList = [
       "Starting runner container (ubuntu-latest)...",
-      "Syncing repository devops-capstone-project from GitHub remote...",
+      "Syncing repository DevOps-Capstone-Workbook-CICD from GitHub remote...",
       "Cloning into '/root/workspace' on branch main...",
       "Setting up system Python 3.9-slim Environment...",
       "Pulling external Postgres SQL container: postgres:alpine...",

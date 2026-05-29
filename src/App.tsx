@@ -49,10 +49,10 @@ export default function App() {
             </div>
             <div className="text-left space-y-0.5">
               <h1 className="text-lg md:text-xl font-bold text-white tracking-tight flex items-center gap-2 font-sans">
-                DevOps Capstone Workbook <span className="text-[10px] bg-indigo-950 text-indigo-400 border border-indigo-500/20 px-2 py-0.5 rounded font-mono font-medium">V1.0</span>
+                DevOps-Capstone-Workbook-CICD <span className="text-[10px] bg-indigo-950 text-indigo-400 border border-indigo-500/20 px-2 py-0.5 rounded font-mono font-medium">V1.0</span>
               </h1>
               <p className="text-xs text-slate-500">
-                Interactive companion workbench matching IBM DevOps final evaluations
+                Interactive companion workbench matching IBM DevOps final evaluations — <span className="text-slate-300 font-semibold">Written by Brian McCarthy</span>
               </p>
             </div>
           </div>
@@ -96,7 +96,18 @@ export default function App() {
         </header>
 
         {/* Dynamic Inner Tab Viewport */}
-        <main className="min-h-[500px]" id="tab-viewport-body">
+        <main className="min-h-[500px] space-y-4" id="tab-viewport-body">
+          {/* Global author verification signature banner */}
+          <div className="flex flex-col sm:flex-row justify-between items-center bg-white border border-slate-200 px-4 py-2.5 rounded-xl text-xs gap-3 text-slate-500 font-sans shadow-xs animate-fadeIn" id="global-author-ribbon">
+            <div className="flex items-center gap-1.5 font-medium">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Project Target: <strong className="text-slate-800">DevOps-Capstone-Workbook-CICD</strong></span>
+            </div>
+            <div className="text-indigo-700 font-extrabold tracking-tight bg-indigo-50/60 border border-indigo-150 border-indigo-100 px-3 py-1 rounded-md text-[11px] flex items-center gap-1.5 shadow-2xs">
+              Written by Brian McCarthy
+            </div>
+          </div>
+
           {activeTab === 'overview' && (
             <OverviewTab 
               onStartPlanning={() => setActiveTab('board')}
@@ -131,7 +142,7 @@ export default function App() {
       <footer className="border-t border-slate-900 bg-slate-950/40 py-6 text-center text-slate-500 text-xs" id="footer-credits">
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-3">
           <p className="font-mono">
-            © 2026 DevOps Capstone Interactive Workbook. Developed under safe sandbox constraints.
+            © 2026 DevOps-Capstone-Workbook-CICD. Written by Brian McCarthy. Developed under safe sandbox constraints.
           </p>
           <div className="flex gap-4 text-[10px] font-mono text-slate-600">
             <span>PORT BINDING: L0-3000 / L1-5000</span>

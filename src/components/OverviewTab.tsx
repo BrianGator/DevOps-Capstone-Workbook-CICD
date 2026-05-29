@@ -75,10 +75,10 @@ export default function OverviewTab({
           </div>
           
           <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-800 mb-2 font-sans">
-            DevOps Capstone Project Hub
+            DevOps-Capstone-Workbook-CICD
           </h1>
           <p className="text-slate-600 text-xs md:text-sm leading-relaxed max-w-xl mb-6">
-            Welcome to the ultimate DevOps Capstone workbench. This interface is carefully designed to guide you through Agile Planning, Test-Driven Flask Development, DevSecOps Hardening, and automated CI/CD container integration. 
+            Welcome to the ultimate DevOps Capstone workbench, <strong>written by Brian McCarthy</strong>. This interface is carefully designed to guide you through Agile Planning, Test-Driven Flask Development, DevSecOps Hardening, and automated CI/CD container integration. 
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-slate-100">

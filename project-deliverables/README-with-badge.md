@@ -1,6 +1,6 @@
-# DevOps Capstone Project
+# DevOps-Capstone-Workbook-CICD
 
-[![CI Build](https://github.com/BrianSMc/devops-capstone-project/actions/workflows/ci-build.yaml/badge.svg)](https://github.com/BrianSMc/devops-capstone-project/actions/workflows/ci-build.yaml)
+[![CI Build](https://img.shields.io/github/actions/workflow/status/BrianGator/DevOps-Capstone-Workbook-CICD/ci-build.yaml?branch=main&logo=github)](https://github.com/BrianGator/DevOps-Capstone-Workbook-CICD/actions/workflows/ci-build.yaml)
 
 An elegantly configured, continuous-integration equipped microservice implementation of a RESTful Customer Account directory built on Python Flask, PostgreSQL database, and SQLAlchemy models.
 
