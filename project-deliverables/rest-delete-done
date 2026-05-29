@@ -1,0 +1,11 @@
+curl -i -X DELETE http://127.0.0.1:5000/accounts/1
+
+HTTP/1.0 204 NO CONTENT
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+Server: Werkzeug/2.0.2 Python/3.9.7
+Date: Fri, 29 May 2026 21:39:00 GMT
+

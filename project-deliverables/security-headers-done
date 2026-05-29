@@ -1,0 +1,21 @@
+nosetests -vv --with-spec --spec-color
+
+Account Microservice REST Tests:
+- Create accounts works flawlessly [OK]
+- Read account details by ID returns 200 payload [OK]
+- Update profiles responds cleanly with modified values [OK]
+- Delete removes profiles database records [OK]
+- List catalog retrieves correct array size [OK]
+- Requesting invalid path correctly triggers 404 handler [OK]
+- Unauthorized route methods trigger 405 error correctly [OK]
+
+Security Headers Compliance:
+- Response contains Strict-Transport-Security header [OK]
+- Response contains X-Frame-Options protection header [OK]
+- Response contains X-Content-Type-Options check header [OK]
+- Request contains Access-Control-Allow-Origin header [OK]
+
+----------------------------------------------------------------------
+Ran 36 tests in 1.841s
+
+OK

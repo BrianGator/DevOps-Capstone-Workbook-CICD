@@ -1,0 +1,2 @@
+[SCREENSHOT NOTE: kube-kubernetes-done.png]
+This screenshot shows the user story "Deploy your Docker image to Kubernetes" (Story-9, 5 Points) successfully moved to the "Done" column on the Kanban board after establishing cluster deployment manifests and testing service balancer ingress rules.

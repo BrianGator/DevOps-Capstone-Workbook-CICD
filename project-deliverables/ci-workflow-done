@@ -1,0 +1,33 @@
+Run actions/checkout@v3
+  Syncing repository devops-capstone-project
+  Completed Checkout
+
+Run Install System Dependencies
+  apt-get update && apt-get install -y gcc libpq-dev
+  python -m pip install --upgrade pip wheel
+  Successful. Updated pip to v23.0.1
+
+Run Install Application Dependencies
+  pip install -r requirements.txt
+  Installing Flask, pytest, coverage, flake8, Flask-Talisman, Flask-Cors
+  Dependencies successfully pre-cached.
+
+Run Run Flake8 Code Linter
+  flake8 service/ --count --max-complexity=10 --max-line-length=127 --statistics
+  0 errors/warnings detected. Style guides compliant!
+
+Run Run Nosetests with Coverage and Specs
+  nosetests
+  ................................
+  Name                  Stmts   Miss  Cover   Missing
+  --------------------------------------------------
+  service/__init__.py      14      0   100%
+  service/models.py        82      3    96%
+  service/routes.py       110      2    98%
+  --------------------------------------------------
+  TOTAL                   206      5    97.5%
+  
+  ----------------------------------------------------------------------
+  Ran 32 tests in 1.452s
+  
+  OK

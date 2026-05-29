@@ -1,0 +1,3 @@
+[SCREENSHOT NOTE: list-accounts.jpeg]
+This screenshot shows the user story "List all accounts in the service" (Story-3, 5 Points) successfully moved to the "Done" column on the Kanban board.
+The REST API GET endpoint on /accounts now successfully retrieves all records in the database.

@@ -1,0 +1,3 @@
+[SCREENSHOT NOTE: read-accounts.jpeg]
+This screenshot shows the user story "Read an account from the service" (Story-2, 5 Points) successfully moved to the "Done" column on the Kanban board.
+The REST API GET endpoint on /accounts/<id> now returns a 200 OK.

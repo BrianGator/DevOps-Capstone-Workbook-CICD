@@ -1,0 +1,4 @@
+REPOSITORY                                                 TAG       IMAGE ID       CREATED          SIZE
+image-registry.openshift-image-registry.svc:5000/acc/v1    latest    461bdf932bc2   10 minutes ago   178MB
+python                                                     3.9-slim  8c267b2d5cb3   2 weeks ago      124MB
+postgres                                                   alpine    da7509f7a77e   3 weeks ago      220MB

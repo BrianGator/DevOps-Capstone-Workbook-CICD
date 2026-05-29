@@ -1,0 +1,3 @@
+[SCREENSHOT NOTE: delete-accounts.jpeg]
+This screenshot shows the user story "Delete an account from the service" (Story-5, 5 Points) successfully moved to the "Done" column on the Kanban board.
+The REST API DELETE endpoint on /accounts/<id> purges records and returns HTTP 204 No Content.

@@ -1,0 +1,6 @@
+[SCREENSHOT NOTE: sprint3-plan.jpeg]
+This screenshot shows the three third-stage user stories added under the Sprint Backlog for Sprint 3:
+1. "Containerize your microservice using Docker" (3 Points, Assigned to John Doe, Sprint 3)
+2. "Deploy your Docker image to Kubernetes" (5 Points, Assigned to John Doe, Sprint 3)
+3. "Create a CD pipeline to automate deployment to Kubernetes" (5 Points, Assigned to John Doe, Sprint 3)
+Total Sprint 3 Load: 13 Story Points.

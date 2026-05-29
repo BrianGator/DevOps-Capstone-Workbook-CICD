@@ -1,0 +1,5 @@
+[SCREENSHOT NOTE: planning-userstories-done.jpeg]
+This screenshot displays the 'New Issues' column on the Agile Kanban Board.
+It showcases the backlog of newly integrated user stories awaiting sprint allocation:
+1. "Containerize your microservice using Docker" (Points: 3, Label: Technical Debt, Assignee: Unassigned)
+2. "Deploy your Docker image to Kubernetes" (Points: 5, Label: Technical Debt, Assignee: Unassigned)

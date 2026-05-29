@@ -1,0 +1,2 @@
+[SCREENSHOT NOTE: security-kanban-done.jpeg]
+This screenshot shows the user story "Need to add security headers and CORS policies" (Story-7, 5 Points) successfully moved to the "Done" column on the Kanban board after implementing Talisman and CORS configuration in Flask.

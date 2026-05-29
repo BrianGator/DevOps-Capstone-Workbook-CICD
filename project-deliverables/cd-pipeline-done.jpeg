@@ -1,0 +1,2 @@
+[SCREENSHOT NOTE: cd-pipeline-done.jpeg]
+This screenshot shows the final user story "Create a CD pipeline to automate deployment to Kubernetes" successfully moved to the "Done" column on the Kanban board after integrating Tekton OpenShift pipeline, completing cloning, lint, test, docker build, and deployment automation successfully.

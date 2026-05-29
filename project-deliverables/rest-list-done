@@ -1,0 +1,22 @@
+curl -i -X GET http://127.0.0.1:5000/accounts
+
+HTTP/1.0 200 OK
+Content-Type: application/json
+Content-Length: 150
+Access-Control-Allow-Origin: *
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+Server: Werkzeug/2.0.2 Python/3.9.7
+Date: Fri, 29 May 2026 21:38:15 GMT
+
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john@doe.com",
+    "address": "123 Main St.",
+    "phone_number": "555-1212",
+    "status": "active"
+  }
+]
