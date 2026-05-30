@@ -1,6 +1,6 @@
 # DevOps-Capstone-Workbook-CICD
 
-[![CI Build](https://img.shields.io/github/actions/workflow/status/BrianGator/DevOps-Capstone-Workbook-CICD/ci-build.yaml?branch=main&logo=github)](https://github.com/BrianGator/DevOps-Capstone-Workbook-CICD/actions/workflows/ci-build.yaml)
+![IBM DevOps Capstone](ibm--devops-capstone.png)
 
 DevOps Customer Account microservice and continuous integration/continuous deployment interactive companion workbook. Designed to demonstrate industry-grade practices for Test-Driven Development (TDD), security hardening, containerization, and pipeline orchestration.
 
