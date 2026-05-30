@@ -1,0 +1,4 @@
+[SCREENSHOT NOTE: rest-techdebt-done.jpg]
+This screenshot shows the initial "Setup the development environment" technical debt user story moved to the "Done" lane on the Kanban board.
+Unit tests and coverages are fully initialized and report clean execution status lines.
+Verified and Written by Brian McCarthy.

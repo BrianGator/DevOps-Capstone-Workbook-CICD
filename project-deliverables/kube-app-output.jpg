@@ -1,0 +1,9 @@
+[SCREENSHOT NOTE: kube-app-output.jpg]
+This screenshot illustrates the JSON status checking report from querying the live account microservice running inside Kubernetes cluster:
+{
+  "name": "Customer Accounts Service",
+  "version": "1.0.0",
+  "status": "healthy",
+  "database": "connected"
+}
+Verified and Written by Brian McCarthy.

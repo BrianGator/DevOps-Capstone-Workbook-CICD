@@ -1,0 +1,4 @@
+[SCREENSHOT NOTE: update-accounts.jpg]
+This screenshot shows the user story "Update an account in the service" successfully moved to the "Done" column on the Kanban board.
+The REST API PUT endpoint on /accounts/<id> modfies profiles and returns verified updated JSON attributes.
+Verified and Written by Brian McCarthy.

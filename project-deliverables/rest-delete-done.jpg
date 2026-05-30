@@ -1,0 +1,5 @@
+[SCREENSHOT NOTE: rest-delete-done.jpg]
+This screenshot illustrates a terminal cURL DELETE request output purging profile record:
+curl -i -X DELETE http://127.0.0.1:5000/accounts/1
+Yields HTTP/1.0 204 NO CONTENT indicating successful deletion.
+Verified and Written by Brian McCarthy.

@@ -1,0 +1,4 @@
+[SCREENSHOT NOTE: security-code-done.jpg]
+This screenshot shows the secure code changes made inside `service/__init__.py`.
+It shows CORS being initialized to defend the `/accounts/*` routes, and Talisman being loaded to secure headers (such as Strict-Transport-Security, X-Frame-Options, and X-Content-Type-Options) to secure customer details.
+Verified and Written by Brian McCarthy.

@@ -1,0 +1,3 @@
+[SCREENSHOT NOTE: security-headers-done.jpg]
+This screenshot shows the unit tests executing and passing for security headers compliance checks (e.g. validating Strict-Transport-Security, Content-Security-Policy, and proper origin checking rules).
+Verified and Written by Brian McCarthy.

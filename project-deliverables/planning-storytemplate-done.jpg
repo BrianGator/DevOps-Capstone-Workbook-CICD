@@ -1,0 +1,4 @@
+[SCREENSHOT NOTE: planning-storytemplate-done.jpg]
+This screenshot shows the successfully configured GitHub Issue template for User Stories.
+It encloses the template structure located inside the `.github/ISSUE_TEMPLATE/user-story.md` file, which prompts developers to outline clear Roles, Functions, Benefits, Details/Assumptions, and Gherkin-language Acceptance Criteria.
+Verified and Written by Brian McCarthy.

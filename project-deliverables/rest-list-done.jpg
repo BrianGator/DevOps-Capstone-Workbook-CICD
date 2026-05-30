@@ -1,0 +1,5 @@
+[SCREENSHOT NOTE: rest-list-done.jpg]
+This screenshot illustrates a terminal cURL GET request output to list all active customer accounts:
+curl -i -X GET http://127.0.0.1:5000/accounts
+Yields HTTP/1.0 200 OK status containing a JSON list of account instances.
+Verified and Written by Brian McCarthy.

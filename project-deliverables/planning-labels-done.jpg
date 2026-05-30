@@ -1,0 +1,9 @@
+[SCREENSHOT NOTE: planning-labels-done.jpg]
+This screenshot shows the Product Backlog containing stories with clear labels:
+- "Setup the development environment" (Label: Technical Debt)
+- "Need the ability to automate continuous integration checks" (Label: Technical Debt)
+- "Read an account from the service" (Label: Enhancement)
+- "List all accounts in the service" (Label: Enhancement)
+- "Update an account in the service" (Label: Enhancement)
+- "Delete an account from the service" (Label: Enhancement)
+Verified and Written by Brian McCarthy.

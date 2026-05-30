@@ -1,0 +1,4 @@
+[SCREENSHOT NOTE: rest-setupcfg-done.jpg]
+This screenshot shows the successfully edited `setup.cfg` configuration file in the project.
+This configures the python `nosetests` tool parameters to show Verbose specs, detailed Colors, and full Coverage modules targeting the `service` directories.
+Verified and Written by Brian McCarthy.

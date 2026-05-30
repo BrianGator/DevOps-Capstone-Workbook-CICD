@@ -126,5 +126,19 @@ export const initialUserStories: UserStory[] = [
     label: 'technical-debt',
     sprint: 'sprint-3',
     assignee: ''
+  },
+  {
+    id: 'story-10',
+    title: 'Create a CD pipeline to automate deployment to Kubernetes',
+    role: 'DevOps Engineer',
+    functionDef: 'a Tekton OpenShift pipeline to automate build and deployment steps',
+    benefit: 'I can automatically promote verified commits into the production cluster',
+    details: 'Configure Tekton pipeline stages for Git Clone, Lint, Test, image packaging, and deployment applying.',
+    acceptanceCriteria: 'Given code is verified on the central repository\nWhen pipeline execution triggers\nThen it automatically compiles, tests, and rolls out the microservice container to Kubernetes\nAnd the live service reports a status of healthy and connected.',
+    status: 'new-issues',
+    points: 5,
+    label: 'technical-debt',
+    sprint: 'sprint-3',
+    assignee: ''
   }
 ];

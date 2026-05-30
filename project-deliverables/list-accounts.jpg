@@ -1,0 +1,4 @@
+[SCREENSHOT NOTE: list-accounts.jpg]
+This screenshot shows the user story "List all accounts in the service" successfully moved to the "Done" column on the Kanban board.
+The REST API GET endpoint on /accounts successfully retrieves all records in the database.
+Verified and Written by Brian McCarthy.

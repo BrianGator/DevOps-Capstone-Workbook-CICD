@@ -1,0 +1,5 @@
+[SCREENSHOT NOTE: rest-read-done.jpg]
+This screenshot illustrates a terminal cURL GET request output to fetch specific profile #1:
+curl -i -X GET http://127.0.0.1:5000/accounts/1
+Yields HTTP/1.0 200 OK status with the account details.
+Verified and Written by Brian McCarthy.

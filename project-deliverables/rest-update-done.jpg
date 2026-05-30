@@ -1,0 +1,5 @@
+[SCREENSHOT NOTE: rest-update-done.jpg]
+This screenshot illustrates a terminal cURL PUT request output updating telephone record to "555-1111":
+curl -i -X PUT http://127.0.0.1:5000/accounts/1 ...
+Yields HTTP/1.0 200 OK status with updated attributes returned.
+Verified and Written by Brian McCarthy.

@@ -1,0 +1,4 @@
+[SCREENSHOT NOTE: read-accounts.jpg]
+This screenshot shows the user story "Read an account from the service" successfully moved to the "Done" column on the Kanban board.
+The REST API GET endpoint on /accounts/<id> now returns 200 OK and is fully green during unit test passes.
+Verified and Written by Brian McCarthy.

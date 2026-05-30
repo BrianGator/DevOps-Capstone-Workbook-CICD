@@ -1,0 +1,4 @@
+[SCREENSHOT NOTE: ci-badge-done.jpg]
+This screenshot shows the successfully uploaded README.md containing a green build status badge indicating actions are passing:
+[![CI Build](https://img.shields.io/github/actions/workflow/status/BrianGator/DevOps-Capstone-Workbook-CICD/ci-build.yaml?branch=main&logo=github)](https://github.com/BrianGator/DevOps-Capstone-Workbook-CICD/actions/workflows/ci-build.yaml)
+Verified and Written by Brian McCarthy.

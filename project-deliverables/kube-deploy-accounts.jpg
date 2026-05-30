@@ -1,0 +1,5 @@
+[SCREENSHOT NOTE: kube-deploy-accounts.jpg]
+This screenshot shows the results of executing:
+$ kubectl get all -l app=accounts
+It displays 3 replica pods successfully running inside the clusters, configured with cluster IP routing and balanced access.
+Verified and Written by Brian McCarthy.

@@ -1,0 +1,3 @@
+[SCREENSHOT NOTE: kube-images.jpg]
+This screenshot shows the compiled Docker images overview. It displays the custom repository image size of 178MB alongside the basic slim Python 3.9 and postgres:alpine images.
+Verified and Written by Brian McCarthy.

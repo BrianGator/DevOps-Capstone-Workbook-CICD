@@ -28,6 +28,90 @@ export default function BoardTab({ stories, onUpdateStories }: BoardTabProps) {
   const [filterSprint, setFilterSprint] = useState<string>('all');
   const [showTemplate, setShowTemplate] = useState(false);
 
+  // Drag and drop states
+  const [draggedStoryId, setDraggedStoryId] = useState<string | null>(null);
+  const [draggedOverStoryId, setDraggedOverStoryId] = useState<string | null>(null);
+  const [draggedOverColumnId, setDraggedOverColumnId] = useState<string | null>(null);
+
+  const handleDragStart = (e: React.DragEvent, storyId: string) => {
+    setDraggedStoryId(storyId);
+    e.dataTransfer.setData("text/plain", storyId);
+    e.dataTransfer.effectAllowed = "move";
+  };
+
+  const handleDragEnd = () => {
+    setDraggedStoryId(null);
+    setDraggedOverStoryId(null);
+    setDraggedOverColumnId(null);
+  };
+
+  const handleDragOverColumn = (e: React.DragEvent, columnId: string) => {
+    e.preventDefault();
+    setDraggedOverColumnId(columnId);
+  };
+
+  const handleDropOnColumn = (e: React.DragEvent, columnId: string) => {
+    e.preventDefault();
+    const storyId = e.dataTransfer.getData("text/plain") || draggedStoryId;
+    if (!storyId) return;
+
+    reorderStory(storyId, columnId, 'top');
+    handleDragEnd();
+  };
+
+  const handleDragOverStory = (e: React.DragEvent, storyId: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDraggedOverStoryId(storyId);
+  };
+
+  const handleDropOnStory = (e: React.DragEvent, targetStoryId: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const storyId = e.dataTransfer.getData("text/plain") || draggedStoryId;
+    if (!storyId || storyId === targetStoryId) return;
+
+    reorderStory(storyId, null, 'card', targetStoryId);
+    handleDragEnd();
+  };
+
+  const reorderStory = (
+    storyId: string, 
+    targetColumnId: string | null, 
+    position: 'top' | 'card', 
+    targetStoryId?: string
+  ) => {
+    const sourceIdx = stories.findIndex(s => s.id === storyId);
+    if (sourceIdx === -1) return;
+    const sourceStory = { ...stories[sourceIdx] };
+
+    // Set new status if changing column
+    if (targetColumnId) {
+      sourceStory.status = targetColumnId as UserStory['status'];
+    } else if (targetStoryId) {
+      const targetStory = stories.find(s => s.id === targetStoryId);
+      if (targetStory) {
+        sourceStory.status = targetStory.status;
+      }
+    }
+
+    const remaining = stories.filter(s => s.id !== storyId);
+
+    if (position === 'top') {
+      const updated = [sourceStory, ...remaining];
+      onUpdateStories(updated);
+    } else if (position === 'card' && targetStoryId) {
+      const targetIdxInRemaining = remaining.findIndex(s => s.id === targetStoryId);
+      if (targetIdxInRemaining !== -1) {
+        const updated = [...remaining];
+        updated.splice(targetIdxInRemaining, 0, sourceStory);
+        onUpdateStories(updated);
+      } else {
+        onUpdateStories([sourceStory, ...remaining]);
+      }
+    }
+  };
+
   // Column definitions matching Lab specs
   const columns = [
     { id: 'new-issues', name: 'New Issues', border: 'border-slate-200' },
@@ -319,7 +403,7 @@ Then [the outcome of action is observed]
       )}
 
       {/* Main Kanban Columns Container */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-3 overflow-x-auto" id="kanban-scroll-field">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-3 overflow-x-auto pb-6" id="kanban-scroll-field">
         {columns.map((col) => {
           // Filter stories that exist in this column status and matches sprint filter
           const colStories = stories.filter(st => {
@@ -332,18 +416,41 @@ Then [the outcome of action is observed]
           return (
             <div 
               key={col.id} 
-              className={`bg-slate-50/70 flex flex-col min-h-[480px] rounded-xl border ${col.border} p-3`}
+              className={`bg-[#f8fafc]/80 flex flex-col min-h-[500px] rounded-xl border ${col.border} p-3 relative min-w-[240px] md:min-w-[190px] lg:min-w-[145px] xl:min-w-[165px] transition-all ${
+                draggedOverColumnId === col.id ? 'bg-indigo-50/40 ring-2 ring-indigo-300' : ''
+              }`}
               id={`col-${col.id}`}
+              onDragOver={(e) => handleDragOverColumn(e, col.id)}
+              onDrop={(e) => handleDropOnColumn(e, col.id)}
             >
               {/* Column Header */}
-              <div className="flex items-center justify-between pb-3 mb-2 border-b border-slate-200">
-                <span className="text-xs font-bold text-slate-700 uppercase font-sans tracking-wide truncate">
+              <div className="sticky top-0 z-10 flex items-center justify-between pb-3 mb-2 border-b border-slate-200 bg-[#f8fafc] -mt-3 pt-3 px-3 -mx-3 rounded-t-xl select-none shadow-xs">
+                <span className="text-xs font-black text-slate-800 uppercase font-sans tracking-wide whitespace-normal break-words h-auto text-left py-0.5 leading-tight pr-1">
                   {col.name}
                 </span>
-                <span className="bg-slate-200 text-slate-600 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">
+                <span className="bg-slate-200 text-slate-700 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full shrink-0">
                   {colStories.length}
                 </span>
               </div>
+
+              {/* Dynamic Dropzone Area to Prepend stories to Top of columns when dragging */}
+              {draggedStoryId && (
+                <div
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const storyId = e.dataTransfer.getData("text/plain") || draggedStoryId;
+                    if (storyId) {
+                      reorderStory(storyId, col.id, 'top');
+                    }
+                    handleDragEnd();
+                  }}
+                  className="border border-dashed border-sky-400 bg-sky-50 text-sky-700 rounded-lg p-2 mb-2 text-center text-[10px] font-bold font-sans tracking-tight cursor-pointer hover:bg-sky-100 transition-all shadow-xs"
+                >
+                  Drop here to place on Top ↑
+                </div>
+              )}
 
               {/* Column Cards */}
               <div className="flex-1 space-y-2.5 overflow-y-auto" id={`list-${col.id}`}>
@@ -354,70 +461,123 @@ Then [the outcome of action is observed]
                     </span>
                   </div>
                 ) : (
-                  colStories.map((story) => (
-                    <motion.div
-                      layoutId={`card-${story.id}`}
-                      key={story.id}
-                      onClick={() => setSelectedStory(story)}
-                      className="bg-white border border-slate-200 hover:border-blue-400 shadow-sm p-3.5 rounded-xl cursor-all-scroll text-left space-y-3 transition-colors relative group"
-                    >
-                      {/* Priority Rank indicator if product backlog */}
-                      <div className="flex justify-between items-start gap-1">
-                        <span className="text-xs font-bold text-slate-800 line-clamp-2 leading-relaxed font-sans">
-                          {story.title}
-                        </span>
-                        {story.points && (
-                          <span className="bg-blue-50 border border-blue-200 text-blue-700 text-[10px] font-mono font-bold h-5 w-5 rounded shrink-0 flex items-center justify-center">
-                            {story.points}
-                          </span>
-                        )}
-                      </div>
+                  colStories.map((story) => {
+                    const isDragged = draggedStoryId === story.id;
+                    const isHoveredOver = draggedOverStoryId === story.id;
 
-                      {/* Card labels */}
-                      <div className="flex flex-wrap gap-1.5 pt-1">
-                        {story.label && story.label === 'technical-debt' && (
-                          <span className="bg-amber-100 border border-amber-205 text-amber-800 text-[9px] uppercase font-mono px-1.5 py-0.5 rounded font-bold">
-                            technical debt
-                          </span>
-                        )}
-                        {story.label && story.label === 'enhancement' && (
-                          <span className="bg-blue-50 border border-blue-150 text-blue-700 text-[9px] uppercase font-mono px-1.5 py-0.5 rounded font-bold">
-                            enhancement
-                          </span>
-                        )}
-                        {story.sprint && story.sprint !== 'none' && (
-                          <span className="bg-purple-50 border border-purple-150 text-purple-700 text-[9px] uppercase font-mono px-1.5 py-0.5 rounded font-bold">
-                            {story.sprint.replace('-', ' ')}
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Footer Actions / Assignee */}
-                      <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-[10px] font-mono text-slate-500">
-                        <span className="flex items-center gap-1">
-                          <Users className="w-3 h-3 text-slate-400" />
-                          <span className="truncate max-w-[64px] font-semibold text-slate-600">
-                            {story.assignee || 'Unassigned'}
-                          </span>
-                        </span>
-                        
-                        {/* Interactive Move Arrow dropdown */}
-                        <div className="relative inline-block text-left opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
-                          <select
-                            value={story.status}
-                            onChange={(e) => handleMoveStory(story.id, e.target.value as any)}
-                            className="bg-slate-150 bg-slate-50 text-[9px] border border-slate-200 text-slate-600 px-1.5 py-0.5 rounded font-mono cursor-pointer focus:outline-none"
-                            onClick={(e) => e.stopPropagation()}
+                    return (
+                      <motion.div
+                        layoutId={`card-${story.id}`}
+                        key={story.id}
+                        onClick={() => setSelectedStory(story)}
+                        draggable="true"
+                        onDragStart={(e) => handleDragStart(e, story.id)}
+                        onDragEnd={handleDragEnd}
+                        onDragOver={(e) => handleDragOverStory(e, story.id)}
+                        onDrop={(e) => handleDropOnStory(e, story.id)}
+                        className={`bg-white border text-left space-y-3 transition-colors relative group select-none shadow-xs p-3.5 rounded-xl cursor-grab active:cursor-grabbing hover:border-indigo-400 ${
+                          isDragged ? 'opacity-30 border-dashed border-slate-300' : 'border-slate-250 border-slate-200'
+                        } ${
+                          isHoveredOver ? 'border-sky-500 ring-2 ring-sky-100' : ''
+                        }`}
+                        title={story.title}
+                      >
+                        {/* Priority Rank indicator if product backlog */}
+                        <div className="flex justify-between items-start gap-1">
+                          <span 
+                            className="text-xs font-bold text-slate-800 break-words whitespace-normal leading-relaxed font-sans"
+                            title={story.title}
                           >
-                            <option value="new-issues">Move to Pipe...</option>
-                            {columns.map(c => (
-                              <option key={c.id} value={c.id}>{c.name}</option>
-                            ))}
-                          </select>
+                            {story.title}
+                          </span>
+                          {story.points && (
+                            <span className="bg-blue-50 border border-blue-200 text-blue-700 text-[10px] font-mono font-bold h-5 w-5 rounded shrink-0 flex items-center justify-center">
+                              {story.points}
+                            </span>
+                          )}
                         </div>
-                      </div>
-                    </motion.div>
-                  ))
+
+                        {/* Card labels */}
+                        <div className="flex flex-wrap gap-1.5 pt-1">
+                          {story.label && story.label === 'technical-debt' && (
+                            <span className="bg-amber-100 border border-amber-205 text-amber-800 text-[9px] uppercase font-mono px-1.5 py-0.5 rounded font-bold">
+                              technical debt
+                            </span>
+                          )}
+                          {story.label && story.label === 'enhancement' && (
+                            <span className="bg-blue-50 border border-blue-150 text-blue-700 text-[9px] uppercase font-mono px-1.5 py-0.5 rounded font-bold">
+                              enhancement
+                            </span>
+                          )}
+                          {story.sprint && story.sprint !== 'none' && (
+                            <span className="bg-purple-50 border border-purple-150 text-purple-700 text-[9px] uppercase font-mono px-1.5 py-0.5 rounded font-bold">
+                              {story.sprint.replace('-', ' ')}
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Footer Actions / Assignee */}
+                        <div className="flex flex-col gap-2 pt-2.5 border-t border-slate-100 text-[10px] font-mono text-slate-500">
+                          <div className="flex items-center justify-between">
+                            <span className="flex items-center gap-1">
+                              <Users className="w-3.5 h-3.5 text-slate-400" />
+                              <span className="truncate max-w-[64px] font-bold text-slate-600">
+                                {story.assignee || 'Unassigned'}
+                              </span>
+                            </span>
+
+                            {/* Quick Back & Forth slider arrows */}
+                            <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  const currentIndex = columns.findIndex(c => c.id === story.status);
+                                  if (currentIndex > 0) {
+                                    handleMoveStory(story.id, columns[currentIndex - 1].id);
+                                  }
+                                }}
+                                disabled={columns.findIndex(c => c.id === story.status) === 0}
+                                className="px-1.5 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 active:bg-slate-300 disabled:opacity-30 disabled:pointer-events-none text-slate-700 font-bold border border-slate-250 transition-all font-sans cursor-pointer text-xs"
+                                title="Move Left"
+                              >
+                                ←
+                              </button>
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  const currentIndex = columns.findIndex(c => c.id === story.status);
+                                  if (currentIndex < columns.length - 1) {
+                                    handleMoveStory(story.id, columns[currentIndex + 1].id);
+                                  }
+                                }}
+                                disabled={columns.findIndex(c => c.id === story.status) === columns.length - 1}
+                                className="px-1.5 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 active:bg-slate-300 disabled:opacity-30 disabled:pointer-events-none text-slate-700 font-bold border border-slate-250 transition-all font-sans cursor-pointer text-xs"
+                                title="Move Right"
+                              >
+                                →
+                              </button>
+                            </div>
+                          </div>
+
+                          {/* Direct Select Relocation Dropdown */}
+                          <div className="flex items-center gap-1 pt-1.5 border-t border-dashed border-slate-100" onClick={(e) => e.stopPropagation()}>
+                            <span className="text-[9px] uppercase tracking-wider font-extrabold text-slate-400 shrink-0">Stage:</span>
+                            <select
+                              value={story.status}
+                              onChange={(e) => handleMoveStory(story.id, e.target.value as any)}
+                              className="w-full bg-slate-50 hover:bg-slate-100 text-[10px] text-slate-700 font-mono font-medium border border-slate-200 rounded px-1 py-0.5 outline-none cursor-pointer focus:border-blue-400"
+                            >
+                              {columns.map(c => (
+                                <option key={c.id} value={c.id}>{c.name}</option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                      </motion.div>
+                    );
+                  })
                 )}
               </div>
             </div>
@@ -428,7 +588,7 @@ Then [the outcome of action is observed]
       {/* Detailed Modal Drawer for inspecting user-story fields, adding Gherkin criteria & labels */}
       {selectedStory && (
         <div 
-          className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4 z-50 overflow-y-auto"
+          className="fixed inset-0 bg-slate-900/40 flex items-center justify-center p-4 z-50 overflow-y-auto"
           onClick={() => setSelectedStory(null)}
           id="epic-details-modal"
         >
